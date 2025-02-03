@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Financial Advice</title>
+</head>
+<body>
+    <h2>Your Financial Advice</h2>
+    <ul>
+        {% for message in advice %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    <br>
+    <a href="/">Go Back</a>
+</body>
+</html>
