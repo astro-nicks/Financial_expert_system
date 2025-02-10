@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Results</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #dbe9fa, #aac4f6);
+            color: #2c3e50;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #1a237e;
+        }
+        canvas {
+            margin-top: 20px;
+            width: 100%;
+            max-height: 300px;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #1a237e;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background: #3949ab;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Investment Recommendations</h2>
+
+        {% if results %}
+            <p><strong>Investment Advice:</strong> {{ results.investment_advice }}</p>
+            <p><strong>Passive Income Options:</strong> {{ results.passive_income_options }}</p>
+            <p><strong>Investment Diversification:</strong> {{ results.investment_diversification }}</p>
+
+            <canvas id="investmentChart"></canvas>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    var ctx = document.getElementById('investmentChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Savings', 'Debt'],
+                            datasets: [{
+                                label: 'Financial Overview',
+                                data:[{{ request.form["savings"] }},
+                                        {{ request.form["debt"] }}
+                                ],
+                                backgroundColor: ['#1565c0', '#d32f2f'],
+                                borderColor: ['#0d47a1', '#b71c1c'],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                });
+            </script>
+        {% else %}
+            <p>No results available. Please enter your details.</p>
+        {% endif %}
+
+        <a href="/investment" class="btn">Back</a>
+    </div>
+</body>
+</html>

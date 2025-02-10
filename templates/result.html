@@ -1,16 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Financial Advice</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Report</title>
+    <link href="{{ url_for('static', filename='css/output.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/chart.js') }}"></script>
 </head>
-<body>
-    <h2>Your Financial Advice</h2>
-    <ul>
-        {% for message in advice %}
-            <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    <br>
-    <a href="/">Go Back</a>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-lg bg-white shadow-lg rounded-lg p-6">
+        <h2 class="text-2xl font-semibold text-center text-green-600">📊 Financial Report</h2>
+        <p class="text-center text-gray-500">Here is your personalized financial analysis.</p>
+
+        <div class="mt-4">
+            <h4 class="text-lg font-semibold">📌 Insights:</h4>
+            {% if advice %}
+                <ul class="mt-2 space-y-2">
+                    {% for item in advice %}
+                    <li class="bg-gray-100 p-2 rounded-lg">{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-gray-500">✅ No financial risks detected! Keep up the good work. 🎉</p>
+            {% endif %}
+        </div>
+
+        <div class="mt-6">
+            <h4 class="text-lg font-semibold">💰 Spending Breakdown:</h4>
+            <canvas id="spendingChart" class="mt-4"></canvas>
+        </div>
+
+
+    
+
+
+    <script>
+        var ctx = document.getElementById('spendingChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ["Essential Expenses", "Non-Essential Expenses", "Savings", "Debt"],
+                datasets: [{
+                    data: [
+                        {{ request.form["essential_expenses"] }},
+                        {{ request.form["non_essential_expenses"] }},
+                        {{ request.form["savings"] }},
+                        {{ request.form["debt"] }}
+                    ],
+                    backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"]
+                }]
+            }
+        });
+    </script>
 </body>
 </html>

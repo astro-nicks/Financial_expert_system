@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> SmartCash Expert System </title>
+        <style>
+            button:hover {
+                border: 2px solid #12294e !important; 
+            }
+            button:active{
+                background-color: #12294e !important;
+                color: white !important;
+            }
+        </style>
+    </head>
+
+    <body style="margin: 0; padding: 0; height: 100%;">
+
+        <div style="background-image: url('/static/pictures/bg.png'); 
+            background-size: cover; background-position: center; background-repeat: no-repeat; 
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
+            display: flex; justify-content: center; align-items: center;">
+
+            <div style="width: 1350px; height: 550px; background-color: white; border-radius: 20px; display: flex;
+            flex-direction: row; gap: 45px; justify-content: center; align-items: center;">
+                
+                <div style="width: 30%; height: 480px;background-color: #d7e4fa; display: flex; 
+                align-items: center; flex-direction: column;">
+                    <div>
+                        <img style="height: 70px; width: 405px;" src="/static/pictures/logomain.jpg">
+                    </div>
+
+                    <div style="width: 350px; display: flex; height: 60px; margin-top: 10px;
+                    flex-direction: row; gap: 25px; align-items: center; justify-content: center;">
+                        <p style="text-align: center; font-weight: 600; font-family: Arial, Helvetica, sans-serif; 
+                        font-size: 25px; color: #12294e;">Hello, User</p>
+
+                        <div style="width: 60px; height: 45px;">
+                            <img style="width: 60px; height: 45px;" src="/static/pictures/new-user.png">
+                        </div>
+                    </div>
+
+                    <div>
+                        <p style="font-weight: 600; font-family: Arial, Helvetica, sans-serif; 
+                        font-size: 25px; color: #12294e;">SERVICES:</p> 
+
+                        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 15px;">  
+                            <button onclick="location.href='{{ url_for('loans') }}'" style="width: 330px; height: 50px; background-color: white; border-radius: 15px;
+                            font-weight: 600; font-family: Arial, Helvetica, sans-serif; font-size: 20px; 
+                            color: #12294e; border: none; cursor: pointer;">
+                                LOANS
+                            </button>
+                            <button onclick="location.href='{{ url_for('expert_advice') }}'" style="width: 330px; height: 50px; background-color: #12294e; border-radius: 15px;
+                            font-weight: 600; font-family: Arial, Helvetica, sans-serif; font-size: 20px; 
+                            color: white; border: none; cursor: pointer;">
+                                EXPERT ADVISE
+                            </button>
+                            <button onclick="location.href='{{ url_for('investment') }}'" style="width: 330px; height: 50px; background-color: white; border-radius: 15px;
+                            font-weight: 600; font-family: Arial, Helvetica, sans-serif; font-size: 20px; 
+                            color: #12294e; border: none; cursor: pointer;">
+                                INVESTMENTS
+                            </button>
+                        </div>
+
+                        <p style="font-weight: 500; font-family: Arial, Helvetica, sans-serif; 
+                        font-size: 20px; color: #2672c9; text-decoration: underline; text-align: center;">Need help?</p>
+                    </div>
+
+                </div>
+                
+                <div style="width: 60%; height: 480px; background-color: #d7e4fa; display: flex; flex-direction: column; align-items: center; ">
+                    <div style="width: 730px; height: 45px; display: flex; flex-direction: row; margin-top: 13px;
+                    gap: 8px; align-items: center;">
+                        <p><a style="text-decoration: none; font-weight: 600; font-family: Arial, Helvetica, sans-serif; 
+                                font-size: 20px; color: #12294e;" href="{{ url_for('home') }}">Home &#9654;</a></p>
+                        <p><a style="text-decoration: none; font-weight: 600; font-family: Arial, Helvetica, sans-serif; 
+                                font-size: 20px; color: #12294e;" href="{{ url_for('home') }}"> Expert advise </a></p>
+                    </div>
+                    <div class="w-full max-w-lg bg-white shadow-lg rounded-lg p-6">
+                        <h2 class="text-2xl font-semibold text-center text-blue-600">💰 Smart Financial Advisor</h2>
+                        <p class="text-center text-gray-500">Get personalized financial insights based on your data.</p>
+                    
+                        <form method="POST" action="/expert_advice" class="mt-4 space-y-4">
+                            <div>
+                                <label class="block text-gray-700">Name</label>
+                                <input type="text" name="name" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700">Income ($)</label>
+                                <input type="number" name="income" step="0.01" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700">Expenses ($)</label>
+                                <input type="number" name="expenses" step="0.01" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700">Savings ($)</label>
+                                <input type="number" name="savings" step="0.01" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700">Debt ($)</label>
+                                <input type="number" name="debt" step="0.01" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700">Essential Expenses ($)</label>
+                                <input type="number" name="essential_expenses" step="0.01" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700">Non-Essential Expenses ($)</label>
+                                <input type="number" name="non_essential_expenses" step="0.01" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700">Investments ($)</label>
+                                <input type="number" name="investments" step="0.01" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700">Passive Income ($)</label>
+                                <input type="number" name="passive_income" step="0.01" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+                                Analyze My Finances
+                            </button>
+                        </form>
+                    </div>
+                    
+
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <p style="font-weight: 500; font-family: Arial, Helvetica, sans-serif; 
+                        font-size: 19px; color: #2672c9; text-decoration: underline; text-align: right; margin-right: 25px;">FAQs</p>
+                    </div>
+                </div>
+
+            </div>    
+
+        </div>
+    </body>
+</html>

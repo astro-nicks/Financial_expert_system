@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> SmartCash Expert System </title>
+        <style>
+             button:active {
+                background-color: white !important; 
+                color: #12294e !important;  
+            }
+        </style>
+    </head>
+
+    <body style="margin: 0; padding: 0; height: 100%;">
+
+        <div style="background-image: url('/static/pictures/bg.png'); 
+            background-size: cover; background-position: center; background-repeat: no-repeat; 
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
+            display: flex; justify-content: center; align-items: center;">
+
+
+            <div style="width: 500px; height: 600px; background-color: white; border-radius: 30px; 
+                display: flex; justify-content: center; align-items: center; flex-direction: column;">
+                <div style=" margin-bottom: 10px;">
+                    <img style="width: 495px; height: 90px;" src="/static/pictures/logomain.jpg">
+                </div>
+
+                <div style="margin-bottom: 40px;">
+                    <p style="font-size: 18px; font-family: Arial, Helvetica, sans-serif;">Enter Username:</p>
+                    <input style="width: 350px; padding: 10px; border: 2px solid #ccc;
+                    border-radius: 5px; font-size: 16px; opacity: 0.7;" type="text" placeholder="Username">
+                    
+                    
+                    <p style="font-size: 18px; font-family: Arial, Helvetica, sans-serif;">Create Password:</p>
+                    <input style="width: 350px; padding: 10px; border: 2px solid #ccc;
+                    border-radius: 5px; font-size: 16px; opacity: 0.7;" type="password" placeholder="Password">
+                </div>
+
+                <button onclick="location.href='{{ url_for('home') }}'" style="border: none; color: white; background-color: #12294e; border-radius: 35px;
+                 padding: 15px 70px 15px 70px; font-weight: 600; font-size: 20px; margin-bottom: 25px; cursor: pointer;">
+                    SIGN UP
+                </button>
+                
+            </div>
+
+
+        </div>
+    </body>
+</html>

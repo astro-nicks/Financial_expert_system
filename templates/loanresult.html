@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCash Risk Assessment</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #dbe9fa, #aac4f6);
+            color: #2c3e50;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color:#1a237e;
+        }
+        canvas {
+            margin-top: 20px;
+            width: 100%;
+            max-height: 300px;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #1a237e;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background:  #3949ab;
+        }
+        .results {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-left: 4px solid #f1c40f;
+            border-radius: 8px;
+            text-align: left;
+        }
+        .results h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .results p {
+            color: #1a237e;
+            font-size: 16px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Financial Risk Assessment</h2>
+
+        {% if results %}
+            <div class="results">
+                <h3>Results:</h3>
+                <p><strong>Risk Level:</strong> {{ results.calculate_risk_level }}</p>
+                <p><strong>Loan Eligibility:</strong> {{ results.loan_eligibility }}</p>
+                <p><strong>Credit Score:</strong> {{ results.credit_score }}</p>
+            </div>
+
+            <canvas id="riskChart"></canvas>
+
+            <script>
+                var ctx = document.getElementById('riskChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Savings', 'Debt'],
+                        datasets: [{
+                            label: 'Financial Overview',
+                            data: [{{ results.savings }}, {{ results.debt }}],
+                            backgroundColor: ['#4CAF50', '#FF5733']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                labels: { color: 'white' }
+                            }
+                        }
+                    }
+                });
+            </script>
+        {% else %}
+            <p>No results available. Please enter your details.</p>
+        {% endif %}
+
+        <a href="/risk-assessment" class="btn">Back</a>
+    </div>
+</body>
+</html>
